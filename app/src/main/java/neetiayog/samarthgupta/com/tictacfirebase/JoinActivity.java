@@ -35,21 +35,33 @@ public class JoinActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
-
                 code = etCode.getText().toString();
-                databaseReference.child("9582184794").addValueEventListener(new ValueEventListener() {
+
+                databaseReference.child("9582184794").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
                         Game game = dataSnapshot.getValue(Game.class);
                         if(game != null){
-                            Toast.makeText(JoinActivity.this, game.lastMove+" ", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(JoinActivity.this, GameActivity.class);
+                            Toast.makeText(JoinActivity.this, game.lastMove + " ", Toast.LENGTH_LONG).show();
+
+
+                            //Test code
+                            game.isStarted = true;
+                            game.host.setTurn(true);
+                            game.away.setTurn(false);
+                            //
+
+                            Intent intent = new Intent(JoinActivity.this, GameAltActivity.class);
                             intent.putExtra("isHost", false);
                             intent.putExtra("code", "9582184794");
+
+
+                            databaseReference.child("9582184794").setValue(game);
+
                             startActivity(intent);
                             finish();
+
                         }
                         else {
                             Toast.makeText(JoinActivity.this, "NO GAME", Toast.LENGTH_LONG).show();
@@ -95,5 +107,9 @@ public class JoinActivity extends AppCompatActivity {
 //
 //            }
 //        });
+    }
+
+    private void doIt() {
+
     }
 }

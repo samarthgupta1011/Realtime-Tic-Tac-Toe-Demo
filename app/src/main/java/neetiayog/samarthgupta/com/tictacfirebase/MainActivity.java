@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                 String hostNumber = "9582184794";
                 databaseReference.child(hostNumber).setValue(game);
 
-                Intent intent = new Intent(MainActivity.this, GameActivity.class);
+                Intent intent = new Intent(MainActivity.this, GameAltActivity.class);
                 intent.putExtra("isHost", true);
                 intent.putExtra("code", hostNumber);
                 startActivity(intent);
